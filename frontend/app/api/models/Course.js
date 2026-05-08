@@ -90,8 +90,10 @@ CourseSchema.methods.calculateStats = function () {
 
   const overallPercentage = (sectionAPercentage + sectionBPercentage) / 2;
 
-  const sectionAMarks = (sectionAPercentage / 100) * 5;
-  const sectionBMarks = (sectionBPercentage / 100) * 5;
+  const sectionAMarks =
+    sectionAPercentage >= 50 ? (sectionAPercentage / 100) * 5 : 0;
+  const sectionBMarks =
+    sectionBPercentage >= 50 ? (sectionBPercentage / 100) * 5 : 0;
   const totalMarks = sectionAMarks + sectionBMarks;
 
   const totalAttended = this.sectionA.attended + this.sectionB.attended;
@@ -101,11 +103,11 @@ CourseSchema.methods.calculateStats = function () {
     (this.sectionB.total - this.sectionB.attended);
   const totalClasses = this.sectionA.total + this.sectionB.total;
 
-  const requiredAttendedFor75 = Math.ceil(totalClasses * 0.75);
-  const safeAbsences = totalAttended - requiredAttendedFor75;
+  const requiredAttendedFor50 = Math.ceil(totalClasses * 0.5);
+  const safeAbsences = totalAttended - requiredAttendedFor50;
 
   let riskLevel = "low";
-  if (overallPercentage < 60) {
+  if (overallPercentage < 50) {
     riskLevel = "high";
   } else if (overallPercentage < 75) {
     riskLevel = "medium";

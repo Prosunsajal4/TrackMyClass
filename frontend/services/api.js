@@ -1,18 +1,16 @@
-import axios from 'axios';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: `${API_URL}/api`,
+  baseURL: "/api",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 // Add token to requests
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -20,21 +18,21 @@ api.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Auth API
 export const authAPI = {
-  register: (data) => api.post('/auth/register', data),
-  login: (data) => api.post('/auth/login', data),
-  getProfile: () => api.get('/auth/profile'),
+  register: (data) => api.post("/auth/register", data),
+  login: (data) => api.post("/auth/login", data),
+  getProfile: () => api.get("/auth/profile"),
 };
 
 // Course API
 export const courseAPI = {
-  getCourses: () => api.get('/courses'),
+  getCourses: () => api.get("/courses"),
   getCourseById: (id) => api.get(`/courses/${id}`),
-  createCourse: (data) => api.post('/courses', data),
+  createCourse: (data) => api.post("/courses", data),
   updateCourse: (id, data) => api.put(`/courses/${id}`, data),
   deleteCourse: (id) => api.delete(`/courses/${id}`),
   updateAttendance: (id, data) => api.put(`/courses/${id}/attendance`, data),
@@ -42,8 +40,8 @@ export const courseAPI = {
 
 // User API
 export const userAPI = {
-  getDashboardStats: () => api.get('/user/dashboard'),
-  getAnalytics: () => api.get('/user/analytics'),
+  getDashboardStats: () => api.get("/user/dashboard"),
+  getAnalytics: () => api.get("/user/analytics"),
 };
 
 export default api;

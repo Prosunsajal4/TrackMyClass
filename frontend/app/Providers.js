@@ -9,7 +9,13 @@ export default function Providers({ children }) {
     <ThemeProvider>
       <AuthProvider>
         {children}
-        <Toaster position="top-right" />
+        <Toaster
+          position="top-right"
+          aria-live="assertive"
+          toastOptions={{
+            duration: 4000,
+          }}
+        />
       </AuthProvider>
     </ThemeProvider>
   );

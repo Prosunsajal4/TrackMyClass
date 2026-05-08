@@ -31,12 +31,24 @@ export default function ChatPage() {
 
     try {
       const response = await api.post("/chat", { message: userMessage });
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: response.data.response },
-      ]);
+      if (response.data?.message) {
+        toast.error(response.data.message);
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: response.data.message },
+        ]);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: response.data.response },
+        ]);
+      }
     } catch (error) {
-      toast.error("Failed to get AI response");
+      const msg =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Failed to get AI response";
+      toast.error(msg);
       setMessages((prev) => [
         ...prev,
         {

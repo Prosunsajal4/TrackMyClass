@@ -39,6 +39,8 @@ export default function Sidebar({ isOpen, onClose }) {
         className={`glass-card fixed left-0 top-0 h-full w-64 p-4 z-50 transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
+        role="navigation"
+        aria-label="Main navigation"
       >
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between mb-8">

@@ -319,6 +319,7 @@ export default function CourseDetailPage() {
                         item.attended,
                       )
                     }
+                    aria-label={`Class ${item.classNumber} in Section ${activeSection}: ${item.attended ? 'Attended' : 'Absent'}. Click to toggle.`}
                     className={`relative aspect-square rounded-lg flex items-center justify-center font-semibold text-lg transition-all duration-300 transform hover:scale-110 ${
                       item.attended
                         ? "bg-gradient-to-br from-green-400 to-green-600 text-white shadow-lg hover:shadow-xl"

@@ -23,7 +23,7 @@ export default function CoursesPage() {
   const [showModal, setShowModal] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [formData, setFormData] = useState({ courseName: '', totalClasses: 30 });
+  const [formData, setFormData] = useState({ courseName: '', sectionATotal: 30, sectionBTotal: 30 });
 
   useEffect(() => {
     fetchCourses();
@@ -54,7 +54,7 @@ export default function CoursesPage() {
       
       setShowModal(false);
       setEditingCourse(null);
-      setFormData({ courseName: '', totalClasses: 30 });
+      setFormData({ courseName: '', sectionATotal: 30, sectionBTotal: 30 });
       fetchCourses();
     } catch (error) {
       toast.error(error.response?.data?.message || 'Operation failed');
@@ -63,7 +63,11 @@ export default function CoursesPage() {
 
   const handleEdit = (course) => {
     setEditingCourse(course);
-    setFormData({ courseName: course.courseName, totalClasses: course.totalClasses });
+    setFormData({ 
+      courseName: course.courseName, 
+      sectionATotal: course.sectionA.total, 
+      sectionBTotal: course.sectionB.total 
+    });
     setShowModal(true);
   };
 
@@ -117,7 +121,7 @@ export default function CoursesPage() {
               <button
                 onClick={() => {
                   setEditingCourse(null);
-                  setFormData({ courseName: '', totalClasses: 30 });
+                  setFormData({ courseName: '', sectionATotal: 30, sectionBTotal: 30 });
                   setShowModal(true);
                 }}
                 className="btn-primary flex items-center gap-2"
@@ -162,7 +166,7 @@ export default function CoursesPage() {
                           {course.courseName}
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                          {course.totalClasses} total classes
+                          Section A: {course.sectionA.total} | Section B: {course.sectionB.total}
                         </p>
                       </div>
                       <div
@@ -274,12 +278,27 @@ export default function CoursesPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Total Classes
+                      Section A Total Classes
                     </label>
                     <input
                       type="number"
-                      value={formData.totalClasses}
-                      onChange={(e) => setFormData({ ...formData, totalClasses: parseInt(e.target.value) })}
+                      value={formData.sectionATotal}
+                      onChange={(e) => setFormData({ ...formData, sectionATotal: parseInt(e.target.value) })}
+                      className="glass-input w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+                      min="1"
+                      max="100"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Section B Total Classes
+                    </label>
+                    <input
+                      type="number"
+                      value={formData.sectionBTotal}
+                      onChange={(e) => setFormData({ ...formData, sectionBTotal: parseInt(e.target.value) })}
                       className="glass-input w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
                       min="1"
                       max="100"
@@ -293,7 +312,7 @@ export default function CoursesPage() {
                       onClick={() => {
                         setShowModal(false);
                         setEditingCourse(null);
-                        setFormData({ courseName: '', totalClasses: 30 });
+                        setFormData({ courseName: '', sectionATotal: 30, sectionBTotal: 30 });
                       }}
                       className="flex-1 btn-secondary"
                     >

@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import ProtectedRoute from '../../components/common/ProtectedRoute';
-import Header from '../../components/common/Header';
-import Sidebar from '../../components/common/Sidebar';
+import Layout from '../../components/common/Layout';
 import { courseAPI } from '../../services/api';
 import toast from 'react-hot-toast';
 import {
@@ -100,12 +99,8 @@ export default function CoursesPage() {
   return (
     <ProtectedRoute>
       <div className="flex">
-        <Sidebar />
-        <main className="flex-1 ml-64 p-6">
-          <Header title="Courses" />
-          
-          <div className="mt-8 space-y-6">
-            {/* Search and Add Button */}
+       Lbyout <div className="mt-8 space-y-6">
+          {/* Search andButton */}
             <div className="flex flex-col sm:flex-row gap-4 justify-between">
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -251,10 +246,10 @@ export default function CoursesPage() {
                 ))}
               </div>
             )}
-          </div>
+        </div>
 
-          {/* Add/Edit Modal */}
-          {showModal && (
+        {/* Add/Edit Modal */}
+        {showModal && (
             <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
               <div className="glass-card rounded-xl p-6 w-full max-w-md animate-fadeIn">
                 <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-6">
@@ -325,9 +320,10 @@ export default function CoursesPage() {
                 </form>
               </div>
             </div>
+            </div>
           )}
-        </main>
-      </div>
+        </div>
+      </Layout>
     </ProtectedRoute>
   );
 }

@@ -5,12 +5,14 @@ A modern, full-stack attendance management and prediction system with AI-powered
 ## 🚀 Features
 
 ### Authentication
+
 - User registration and login
 - JWT-based authentication
 - Persistent login sessions
 - Secure password hashing with bcrypt
 
 ### Dashboard
+
 - Overall attendance statistics
 - Total courses overview
 - Attendance marks summary
@@ -20,6 +22,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 - Recent courses list
 
 ### Course Management
+
 - Add new courses
 - Edit existing courses
 - Delete courses
@@ -27,6 +30,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 - Real-time statistics
 
 ### Attendance Tracking
+
 - Separate tracking for Section A and Section B
 - Clickable attendance boxes (30 classes per section)
 - Tick/untick attendance with smooth animations
@@ -35,6 +39,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 - Visual indicators (green for attended, gray for absent)
 
 ### Attendance Calculation
+
 - Section A = 5 marks
 - Section B = 5 marks
 - Total = 10 marks
@@ -44,6 +49,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 - Safe absences calculation
 
 ### AI Predictions
+
 - Future attendance prediction
 - Intelligent suggestions
 - Risk warnings
@@ -51,6 +57,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 - Trend analysis (stable/declining/critical)
 
 ### Analytics
+
 - Section comparison charts
 - Marks visualization
 - Attendance radar chart
@@ -58,6 +65,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 - Average statistics
 
 ### UI/UX
+
 - Glassmorphism design
 - Dark/Light mode toggle
 - Responsive design
@@ -67,6 +75,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 - Beautiful card layouts
 
 ### Extra Features
+
 - Search courses
 - Filter functionality
 - Export attendance report as PDF
@@ -77,6 +86,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - **Next.js 14** - React framework
 - **React 18** - UI library
 - **Tailwind CSS** - Styling
@@ -88,6 +98,7 @@ A modern, full-stack attendance management and prediction system with AI-powered
 - **Lucide React** - Icons
 
 ### Backend
+
 - **Node.js** - Runtime
 - **Express.js** - Web framework
 - **MongoDB** - Database
@@ -173,20 +184,23 @@ TrackMyClass/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd TrackMyClass
    ```
 
 2. **Install Backend Dependencies**
+
    ```bash
    cd backend
    npm install
    ```
 
 3. **Configure Backend Environment**
-   
+
    Create a `.env` file in the `backend` directory:
+
    ```env
    PORT=5000
    MONGODB_URI=mongodb://localhost:27017/attendance-predictor
@@ -195,6 +209,7 @@ TrackMyClass/
    ```
 
 4. **Start MongoDB**
+
    ```bash
    # Make sure MongoDB is running
    # On Windows: Start MongoDB service
@@ -202,32 +217,38 @@ TrackMyClass/
    ```
 
 5. **Start Backend Server**
+
    ```bash
    npm run dev
    ```
+
    The backend will run on `http://localhost:5000`
 
 6. **Install Frontend Dependencies**
+
    ```bash
    cd ../frontend
    npm install
    ```
 
 7. **Configure Frontend Environment**
-   
+
    The `.env.local` file is already configured:
+
    ```env
    NEXT_PUBLIC_API_URL=http://localhost:5000
    ```
 
 8. **Start Frontend Development Server**
+
    ```bash
    npm run dev
    ```
+
    The frontend will run on `http://localhost:3000`
 
 9. **Open the Application**
-   
+
    Navigate to `http://localhost:3000` in your browser.
 
 ## 📱 Usage
@@ -244,11 +265,13 @@ TrackMyClass/
 ## 🎨 Attendance Calculation Logic
 
 ### Marks System
+
 - **Section A**: 5 marks (based on attendance percentage)
 - **Section B**: 5 marks (based on attendance percentage)
 - **Total**: 10 marks
 
 ### Calculation Example
+
 ```
 Section A: 80% attendance → 4/5 marks
 Section B: 60% attendance → 3/5 marks
@@ -256,12 +279,15 @@ Total: 4 + 3 = 7/10 marks
 ```
 
 ### Risk Levels
+
 - **High Risk**: Below 60% attendance
 - **Medium Risk**: 60% - 75% attendance
 - **Low Risk**: Above 75% attendance
 
 ### Safe Absences
+
 Calculated based on maintaining 75% overall attendance:
+
 ```
 Safe Absences = Current Attended - Required Attended for 75%
 Required Attended for 75% = ceil(Total Classes × 0.75)
@@ -270,11 +296,13 @@ Required Attended for 75% = ceil(Total Classes × 0.75)
 ## 🔐 API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - Login user
 - `GET /api/auth/profile` - Get user profile (protected)
 
 ### Courses
+
 - `GET /api/courses` - Get all courses (protected)
 - `POST /api/courses` - Create course (protected)
 - `GET /api/courses/:id` - Get course by ID (protected)
@@ -283,6 +311,7 @@ Required Attended for 75% = ceil(Total Classes × 0.75)
 - `PUT /api/courses/:id/attendance` - Update attendance (protected)
 
 ### User
+
 - `GET /api/user/dashboard` - Get dashboard stats (protected)
 - `GET /api/user/analytics` - Get analytics data (protected)
 
@@ -297,6 +326,7 @@ Export your attendance reports as PDF by clicking the "Export PDF" button on the
 ## 🔮 AI Predictions
 
 The application provides intelligent predictions:
+
 - Future attendance percentage
 - Classes needed to reach target percentage
 - Risk warnings
@@ -306,15 +336,18 @@ The application provides intelligent predictions:
 ## 🐛 Troubleshooting
 
 ### MongoDB Connection Issues
+
 - Ensure MongoDB is running
 - Check the MONGODB_URI in `.env`
 - Verify MongoDB is accessible on the specified port
 
 ### CORS Errors
+
 - Ensure the backend is running on port 5000
 - Check NEXT_PUBLIC_API_URL in frontend `.env.local`
 
 ### Build Errors
+
 - Delete `node_modules` and `package-lock.json`
 - Run `npm install` again
 - Clear Next.js cache: `rm -rf .next`
@@ -334,3 +367,54 @@ For questions or support, please open an issue on GitHub.
 ---
 
 Built with ❤️ using Next.js, Express.js, and MongoDB
+
+---
+
+## 🚀 Quick Deployment Guide
+
+### Recommended Setup: Frontend on Vercel + Backend on Render
+
+#### Step 1: Deploy Backend to Render (5 minutes)
+
+1. Push backend code to GitHub
+2. Go to [render.com](https://render.com) → New Web Service
+3. Connect your GitHub repo (backend folder)
+4. Configure:
+   - Build Command: `npm install`
+   - Start Command: `node server.js`
+5. Add Environment Variables:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string
+   - `JWT_SECRET`: Generate a strong secret
+   - `JWT_EXPIRE`: 7d
+   - `FRONTEND_URL`: Your Vercel URL (add after frontend deployment)
+   - `NODE_ENV`: production
+6. Click Deploy → Copy the backend URL
+
+#### Step 2: Set up MongoDB Atlas (Free)
+
+1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+2. Create free cluster → Create database user
+3. Network Access → Add IP: `0.0.0.0/0`
+4. Get connection string
+
+#### Step 3: Deploy Frontend to Vercel (3 minutes)
+
+1. Push frontend code to GitHub
+2. Go to [vercel.com](https://vercel.com) → New Project
+3. Import your GitHub repo
+4. Configure:
+   - Root Directory: `frontend`
+   - Framework: Next.js
+5. Add Environment Variable:
+   - `NEXT_PUBLIC_API_URL`: Your backend URL from Render
+6. Click Deploy
+
+#### Step 4: Update Backend CORS
+
+1. Go to Render dashboard
+2. Add `FRONTEND_URL`: Your Vercel URL
+3. Redeploy backend
+
+**That's it! Your app is live! 🎉**
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)

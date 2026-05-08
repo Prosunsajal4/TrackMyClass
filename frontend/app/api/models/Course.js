@@ -79,13 +79,20 @@ CourseSchema.pre("save", function (next) {
 });
 
 CourseSchema.methods.calculateStats = function () {
+  const sectionAAttended = this.sectionA.attendance.filter(
+    (a) => a.attended,
+  ).length;
+  const sectionBAttended = this.sectionB.attendance.filter(
+    (a) => a.attended,
+  ).length;
+
   const sectionAPercentage =
     this.sectionA.total > 0
-      ? (this.sectionA.attended / this.sectionA.total) * 100
+      ? (sectionAAttended / this.sectionA.total) * 100
       : 0;
   const sectionBPercentage =
     this.sectionB.total > 0
-      ? (this.sectionB.attended / this.sectionB.total) * 100
+      ? (sectionBAttended / this.sectionB.total) * 100
       : 0;
 
   const overallPercentage = (sectionAPercentage + sectionBPercentage) / 2;
@@ -96,11 +103,11 @@ CourseSchema.methods.calculateStats = function () {
     sectionBPercentage >= 50 ? (sectionBPercentage / 100) * 5 : 0;
   const totalMarks = sectionAMarks + sectionBMarks;
 
-  const totalAttended = this.sectionA.attended + this.sectionB.attended;
+  const totalAttended = sectionAAttended + sectionBAttended;
   const totalMissed =
     this.sectionA.total -
-    this.sectionA.attended +
-    (this.sectionB.total - this.sectionB.attended);
+    sectionAAttended +
+    (this.sectionB.total - sectionBAttended);
   const totalClasses = this.sectionA.total + this.sectionB.total;
 
   const requiredAttendedFor50 = Math.ceil(totalClasses * 0.5);

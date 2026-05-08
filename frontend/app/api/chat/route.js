@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
@@ -6,12 +6,18 @@ export async function POST(request) {
     const { message } = body;
 
     if (!message) {
-      return NextResponse.json({ message: 'Message is required' }, { status: 400 });
+      return NextResponse.json(
+        { message: "Message is required" },
+        { status: 400 },
+      );
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ message: 'AI service not configured' }, { status: 500 });
+      return NextResponse.json(
+        { message: "AI service not configured" },
+        { status: 500 },
+      );
     }
 
     // Create a context-aware prompt
@@ -29,11 +35,11 @@ Provide helpful, concise responses about:
 Keep responses friendly and under 150 words.`;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           contents: [
@@ -46,21 +52,29 @@ Keep responses friendly and under 150 words.`;
             },
           ],
         }),
-      }
+      },
     );
 
     const data = await response.json();
 
     if (data.error) {
-      console.error('Gemini API error:', data.error);
-      return NextResponse.json({ message: 'AI service error' }, { status: 500 });
+      console.error("Gemini API error:", data.error);
+      return NextResponse.json(
+        { message: "AI service error" },
+        { status: 500 },
+      );
     }
 
-    const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I could not generate a response.';
+    const aiResponse =
+      data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Sorry, I could not generate a response.";
 
     return NextResponse.json({ response: aiResponse });
   } catch (error) {
-    console.error('Chat error:', error);
-    return NextResponse.json({ message: 'Failed to get AI response' }, { status: 500 });
+    console.error("Chat error:", error);
+    return NextResponse.json(
+      { message: "Failed to get AI response" },
+      { status: 500 },
+    );
   }
 }

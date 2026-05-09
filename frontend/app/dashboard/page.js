@@ -188,7 +188,10 @@ export default function DashboardPage() {
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
                 Risk Distribution
               </h3>
-              <div className="h-64" aria-label="Doughnut chart showing attendance risk levels: High Risk, Medium Risk, Low Risk">
+              <div
+                className="h-64"
+                aria-label="Doughnut chart showing attendance risk levels: High Risk, Medium Risk, Low Risk"
+              >
                 <Doughnut data={doughnutData} options={chartOptions} />
               </div>
             </div>
@@ -197,7 +200,10 @@ export default function DashboardPage() {
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
                 Course Attendance
               </h3>
-              <div className="h-64" aria-label="Bar chart showing attendance percentages for recent courses">
+              <div
+                className="h-64"
+                aria-label="Bar chart showing attendance percentages for recent courses"
+              >
                 <Bar data={barData} options={chartOptions} />
               </div>
             </div>

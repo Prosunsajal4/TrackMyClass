@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { AuthProvider } from '../context/AuthContext';
-import { Toaster } from 'react-hot-toast';
-import { ThemeProvider } from '../context/ThemeContext';
+import { AuthProvider } from "../context/AuthContext";
+import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "../context/ThemeContext";
 
 export default function Providers({ children }) {
   return (

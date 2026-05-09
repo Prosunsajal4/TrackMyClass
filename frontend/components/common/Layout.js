@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Sidebar from './Sidebar';
-import Header from './Header';
+import { useState } from "react";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
 
 export default function Layout({ children, title }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -18,10 +18,11 @@ export default function Layout({ children, title }) {
       </a>
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <main className="md:ml-64" id="main-content">
-        <Header title={title} onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
-        <div className="p-4 md:p-6">
-          {children}
-        </div>
+        <Header
+          title={title}
+          onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        />
+        <div className="p-4 md:p-6">{children}</div>
       </main>
     </div>
   );

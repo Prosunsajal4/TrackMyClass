@@ -90,7 +90,10 @@ Keep responses friendly and under 150 words.`;
       if (response.status === 429) {
         console.warn("Rate limit exceeded for model", modelName);
         return NextResponse.json(
-          { message: "AI service is temporarily busy. Please try again in a few minutes." },
+          {
+            message:
+              "AI service is temporarily busy. Please try again in a few minutes.",
+          },
           { status: 429 },
         );
       }

@@ -40,9 +40,9 @@ Keep responses friendly and under 150 words.`;
       .map((model) => model.trim())
       .filter(Boolean);
     const defaultModels = [
-      process.env.GEMINI_MODEL || "gemini-1.5-flash",
-      "gemini-1.5-pro",
-      "gemini-1.0-pro",
+      process.env.GEMINI_MODEL || "gemini-2.0-flash",
+      "gemini-2.5-flash",
+      "gemini-2.0-flash-lite",
     ];
     const modelsToTry = modelList.length ? modelList : defaultModels;
     const endpointBase =
@@ -85,6 +85,14 @@ Keep responses friendly and under 150 words.`;
       if (response.status === 404) {
         console.warn("Model not found, trying next", modelName);
         continue;
+      }
+
+      if (response.status === 429) {
+        console.warn("Rate limit exceeded for model", modelName);
+        return NextResponse.json(
+          { message: "AI service is temporarily busy. Please try again in a few minutes." },
+          { status: 429 },
+        );
       }
 
       console.error("Gemini API responded with status", response.status, text);

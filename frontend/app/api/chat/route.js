@@ -40,8 +40,8 @@ Keep responses friendly and under 150 words.`;
       .map((model) => model.trim())
       .filter(Boolean);
     const defaultModels = [
-      process.env.GEMINI_MODEL || "gemini-2.0-flash",
-      "gemini-2.5-flash",
+      process.env.GEMINI_MODEL || "gemini-2.5-flash",
+      "gemini-2.0-flash",
       "gemini-2.0-flash-lite",
     ];
     const modelsToTry = modelList.length ? modelList : defaultModels;
